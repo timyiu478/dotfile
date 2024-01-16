@@ -35,7 +35,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 # Wallpaper
-exec --no-startup-id feh --bg-fill ~/Pictures/cat.jpg
+exec --no-startup-id feh --bg-fill ~/Pictures/nature.jpeg
 
 # transparent
 exec --no-startup-id picom -CGb
