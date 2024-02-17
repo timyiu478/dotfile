@@ -1,7 +1,11 @@
 shell:
   program: /usr/bin/fish
+  args:
+    - -l
+    - -c
+    - "tmux"
 window:
-  opacity: 0.95
+  opacity: 1 
   decorations: Full
   decorations_theme_variant: Dark
 font:
