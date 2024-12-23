@@ -4,4 +4,4 @@ vim.cmd [[
 ]]
 
 -- Keymappigs
-vim.keymap.set('n', 'gbb', ":GBrowse<CR>")
+vim.keymap.set({'n', 'v'}, 'gbb', ":GBrowse<CR>")

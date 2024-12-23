@@ -12,15 +12,11 @@ end
 local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-  })
-
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
   use 'wbthomason/packer.nvim'
   use 'tpope/vim-commentary'
   use 'dracula/vim'
-  use 'AckslD/nvim-gfold.lua'
+  use { "AckslD/nvim-gfold.lua", }
   use { "ellisonleao/gruvbox.nvim" }
   use { "catppuccin/nvim", as = "catppuccin" }
   use {'stevearc/dressing.nvim'}
@@ -38,13 +34,57 @@ return require('packer').startup(function(use)
   use 'idanarye/vim-merginal'
   use 'stevearc/oil.nvim'
   use 'almo7aya/openingh.nvim'
+  use 'MagicDuck/grug-far.nvim'
+  use 'MunifTanjim/nui.nvim'
+  use 'rcarriga/nvim-notify'
+
   -- completion
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
+  use 'hrsh7th/cmp-buffer'
+  use 'hrsh7th/cmp-path'
+  use 'hrsh7th/cmp-cmdline'
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
   use "rafamadriz/friendly-snippets"
+  use {
+    'LukasPietzschmann/telescope-tabs',
+    requires = { 'nvim-telescope/telescope.nvim' },
+  }
 
+  use({
+    "folke/noice.nvim",
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+      }
+  })
+
+  use({
+    "epwalsh/obsidian.nvim",
+    tag = "*",  -- recommended, use latest release instead of latest commit
+    requires = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+
+      -- see below for full list of optional dependencies 👇
+    },
+  })
+
+  use({
+    "vhyrro/luarocks.nvim",
+     priority = 1001, -- this plugin needs to run before anything else
+     opts = {
+      rocks = { "magick" },
+     },
+  })
 
   use({
     "williamboman/mason.nvim",
@@ -54,7 +94,7 @@ return require('packer').startup(function(use)
 
   use({
 	  'nvim-telescope/telescope.nvim',
-	  tag = '0.1.0',
+	  tag = '0.1.8',
 	  requires = { {'nvim-lua/plenary.nvim'} }
   })
 
@@ -67,6 +107,18 @@ return require('packer').startup(function(use)
     'phaazon/hop.nvim',
     branch = 'v2', -- optional but strongly recommended
   }
+
+  use({
+    "3rd/image.nvim",
+     dependencies = { {"luarocks.nvim"} },
+  })
+
+  use({
+    "lervag/vimtex",
+    lazy = true,     -- we don't want to lazy load VimTeX
+    -- tag = "v2.15", -- uncomment to pin to a specific release
+  })
+
 
   if packer_bootstrap then
     require('packer').sync()
